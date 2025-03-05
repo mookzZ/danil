@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Воинский учет</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function loadPage(page) {
+                $(".content").fadeOut(200, function() {
+                    $(".content").load("pages/" + page, function(response, status) {
+                        if (status === "error") {
+                            $(".content").html("<p>Ошибка загрузки. Попробуйте позже.</p>");
+                        }
+                        $(".content").fadeIn(200);
+                    });
+                });
+            }
+
+            $(".nav-link").click(function(event) {
+                event.preventDefault();
+                let page = $(this).attr("href");
+                history.pushState({}, '', page);
+                loadPage(page);
+            });
+
+            loadPage("home.html"); // Загружаем главную страницу при запуске
+        });
+    </script>
+    <style>
+        /* Общий стиль */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f1;
+            text-align: center;
+        }
+
+        /* Шапка */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            position: relative;
+        }
+
+        /* Кнопка входа через Госуслуги */
+        .gosuslugi-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background-color: #ff9800;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .gosuslugi-btn:hover {
+            background-color: #e68900;
+        }
+
+        /* Навигация */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background: #34495e;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 12px 18px;
+            display: inline-block;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: #1abc9c;
+        }
+
+        /* Контент */
+        main {
+            padding: 30px;
+        }
+
+        .content {
+            background: white;
+            padding: 25px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            max-width: 900px;
+            margin: auto;
+            text-align: left;
+        }
+
+        /* Заголовки */
+        .content h2 {
+            color: #2c3e50;
+            font-size: 26px;
+            border-bottom: 2px solid #1abc9c;
+            padding-bottom: 10px;
+        }
+
+        /* Текст */
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Футер */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Адаптация под мобильные устройства */
+        @media screen and (max-width: 768px) {
+            header {
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            .gosuslugi-btn {
+                top: 10px;
+                right: 10px;
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .content {
+                padding: 15px;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Воинский учет в России</h1>
+        <a href="https://esia.gosuslugi.ru/login/" class="gosuslugi-btn">Войти через Госуслуги</a>
+        <nav>
+            <ul>
+                <li><a href="home.html" class="nav-link">Главная</a></li>
+                <li><a href="tests.html" class="nav-link">Тесты</a></li>
+                <li><a href="categories.html" class="nav-link">Категории</a></li>
+                <li><a href="diseases.html" class="nav-link">Болезни</a></li>
+                <li><a href="laws.html" class="nav-link">Законы РФ</a></li>
+                <li><a href="documents.html" class="nav-link">Документы</a></li>
+                <li><a href="opportunities.html" class="nav-link">Возможности</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <!-- Сюда загружаются страницы -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Информационный сайт о воинском учете</p>
+    </footer>
+</body>
+</html>
